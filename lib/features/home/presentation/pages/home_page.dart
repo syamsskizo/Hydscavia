@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/core/common/constants/app_constants.dart';
 import 'package:flutter_application_1/features/home/data/dummy_product.dart';
+import 'package:flutter_application_1/features/home/presentation/pages/category_product_page.dart';
 import 'package:flutter_application_1/features/home/presentation/widgets/animated_list_item.dart';
 import 'package:flutter_application_1/features/home/presentation/widgets/custom_search_bar.dart';
 import 'package:flutter_application_1/features/home/presentation/widgets/featured_items.dart';
@@ -105,12 +106,11 @@ class HomePage extends StatelessWidget {
             child: ProductCard(
               product: product,
               onTap: () {
-                // Navigate to detail screen 
-              } ,),
+                // Navigate to detail screen
+              },
+            ),
           );
-        },
-        childCount: dummyProducts.length,
-        ), 
+        }, childCount: dummyProducts.length),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 0.6,
@@ -118,7 +118,7 @@ class HomePage extends StatelessWidget {
           mainAxisSpacing: 16,
         ),
       ),
-      );
+    );
   }
 
   Widget _buildCategoryFilter(BuildContext context) {
@@ -149,6 +149,12 @@ class HomePage extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {
                     // Nanti ganti ke StatefulWidget biar bisa setState
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => CategoryProductsPage(category: category),
+                      ),
+                    );
                   },
                   child: _categoryButton(category, isSelected),
                 ),
