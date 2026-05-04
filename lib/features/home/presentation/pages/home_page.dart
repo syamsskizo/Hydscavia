@@ -105,12 +105,26 @@ class HomePage extends StatelessWidget {
             child: ProductCard(
               product: product,
               onTap: () {
-                // Navigate to detail screen 
-              } ,),
+                // Navigate to detail screen
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        ProductDetailPage(product: product),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                          return FadeTransition(
+                            opacity: animation,
+                            child: child,
+                          );
+                        },
+                        transitionDuration: Duration(milliseconds: 300), 
+                  ),
+                );
+              },
+            ),
           );
-        },
-        childCount: dummyProducts.length,
-        ), 
+        }, childCount: dummyProducts.length),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 0.6,
@@ -118,7 +132,7 @@ class HomePage extends StatelessWidget {
           mainAxisSpacing: 16,
         ),
       ),
-      );
+    );
   }
 
   Widget _buildCategoryFilter(BuildContext context) {
