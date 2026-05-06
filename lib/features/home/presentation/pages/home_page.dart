@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_application_1/core/common/constants/app_constants.dart';
 import 'package:flutter_application_1/features/home/data/dummy_product.dart';
 import 'package:flutter_application_1/features/home/presentation/pages/category_product_page.dart';
+import 'package:flutter_application_1/features/home/presentation/pages/product_detail_page.dart';
 import 'package:flutter_application_1/features/home/presentation/widgets/animated_list_item.dart';
 import 'package:flutter_application_1/features/home/presentation/widgets/custom_search_bar.dart';
 import 'package:flutter_application_1/features/home/presentation/widgets/featured_items.dart';
@@ -107,6 +108,21 @@ class HomePage extends StatelessWidget {
               product: product,
               onTap: () {
                 // Navigate to detail screen
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        ProductDetailPage(product: product),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                          return FadeTransition(
+                            opacity: animation,
+                            child: child,
+                          );
+                        },
+                    transitionDuration: Duration(milliseconds: 300),
+                  ),
+                );
               },
             ),
           );
@@ -152,7 +168,8 @@ class HomePage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => CategoryProductsPage(category: category),
+                        builder: (_) =>
+                            CategoryProductsPage(category: category),
                       ),
                     );
                   },
