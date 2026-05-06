@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/features/home/domain/entities/product.dart';
-import 'package:flutter_nestjs_tutorial_project/features/home/domain/entities/product.dart';'
+import 'package:flutter_application_1/core/common/constants/app_constants.dart';
+import 'package:flutter_nestjs_tutorial_project/features/home/domain/entities/product.dart';
 
 class ProductDetailPage extends StatefulWidget {
   final Product product;
@@ -21,16 +21,15 @@ class _ProductDetailPageState extends State<ProductDetailPage>
   @override
   void initState() {
     super.initState();
-
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 600),
+      duration: Duration(milliseconds: 600),
     );
 
-    _contentAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+    _contentAnimation = Tween<double>(begin: 1.0, end: 0.0).animate(
       CurvedAnimation(
         parent: _animationController,
-        curve: const Interval(0.0, 1.0, curve: Curves.easeOut),
+        curve: Interval(0.0, 1.0, curve: Curves.easeOut),
       ),
     );
 
@@ -44,23 +43,23 @@ class _ProductDetailPageState extends State<ProductDetailPage>
     super.dispose();
   }
 
-  // get all images including imageUrl and images list
+  // Get all images including imageUrl and images list
   List<String> get _allImages {
     final Set<String> imageSet = <String>{};
 
-    // add main imageUrl
+    // Add the main imageurl first
     if (widget.product.imageUrl.isNotEmpty) {
       imageSet.add(widget.product.imageUrl);
     }
 
-    // add images list
+    // Add all images from the images list
     for (final String image in widget.product.images) {
       if (image.isNotEmpty) {
         imageSet.add(image);
       }
     }
 
-    // fallback
+    // Ensure we have at least one image (fallback to imageUrl if images list is empty)
     if (imageSet.isEmpty && widget.product.imageUrl.isNotEmpty) {
       imageSet.add(widget.product.imageUrl);
     }
@@ -78,6 +77,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
       backgroundColor: Colors.grey[100],
       body: Column(
         children: [
+          // Product Images PageView
           SizedBox(
             height: imageHeight + topPadding,
             child: Stack(
@@ -96,7 +96,16 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
-                            // TODO: full screen viewer
+                            // navigate to full screen image viewer
+                           Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => FullScreenImageViewer(
+                                  images: _allImages,
+                                  initialIndex: index,
+                                ),
+                              ),
+                            ); 
                           },
                           child: Container(
                             color: Colors.grey[100],
@@ -110,50 +119,87 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                     ),
                   ),
                 ),
-               // Back and wishlist buttons 
-                // indicator dots
+
+                // back and wishlist buttons
                 Positioned(
                   top: topPadding + 16,
                   left: 16,
                   right: 16,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children:
-                    //  List.generate(
-                      _allImages.length,
-                      (index) => Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 4),
-                        width: _currentImageIndex == index ? 10 : 6,
-                        height: _currentImageIndex == index ? 10 : 6,
-                        decoration: BoxDecoration(
-                          color: _currentImageIndex == index
-                              ? Colors.black
-                              : Colors.grey,
-                          shape: BoxShape.circle,
+                    children: [
+                      _buildCircleButton(
+                        icon: Icons.arrow_back,
+                        onTap: () => Navigator.pop(context),
+                      ),
+                      _buildCircularButton(
+                        icon: icons.favorite_border,
+                        onTap: () {},
+                      ),
+                    ],
+                  ),
+                ),
+
+                // page indicators (only show if there are multiple images)
+                if (_allImages.length > 1)
+                  Positioned(
+                    bottom: 24,
+                    left: 0,
+                    right: 0,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(
+                        _allImages.length,
+                        (index) => Container(
+                          width: 8,
+                          height: 8,
+                          margin: EdgeInsets.symmetric(horizontal: 4),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: _currentImageIndex == index
+                                ? AppConstants.primaryColor
+                                : Colors.grey(300),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
               ],
             ),
           ),
-
-          // contoh content pakai animasi
-          FadeTransition(
-            opacity: _contentAnimation,
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Text(
-                widget.product.name,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+                 // details section
+          Expanded(
+            child: ProductDetails(
+              product: widget.product,
+              contentAnimation: _contentAnimation,
+            ),// ProductDetails
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildCircularButton({
+    required IconData icon,
+    required VoidCallback onTap,
+    Color? iconColor,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.05),
+              spreadRadius: 1,
+              blurRadius: 10,
+            ),
+          ],
+        ),
+        child: Icon(icon, size: 20, color: iconColor),
       ),
     );
   }
