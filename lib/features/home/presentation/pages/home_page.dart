@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/core/common/constants/app_constants.dart';
 import 'package:flutter_application_1/features/home/data/dummy_product.dart';
+import 'package:flutter_application_1/features/home/presentation/pages/all_product_screen.dart';
 import 'package:flutter_application_1/features/home/presentation/pages/category_product_page.dart';
 import 'package:flutter_application_1/features/home/presentation/pages/product_detail_page.dart';
 import 'package:flutter_application_1/features/home/presentation/widgets/animated_list_item.dart';
@@ -76,6 +77,12 @@ class HomePage extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       //navogate yo all product
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AllProductScreen(),
+                        ),
+                      );
                     },
                     child: Text(
                       'View All',

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/common/constants/app_constants.dart';
+import 'package:flutter_application_1/features/featured_items/presentation/pages/featured_item_screen.dart';
 import 'package:flutter_application_1/features/home/domain/entities/product.dart';
 import 'package:flutter_application_1/features/home/presentation/widgets/product_card.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,7 +17,7 @@ class FeaturedItems extends StatelessWidget {
       Product(
         id: '1',
         name: 'Hoodie',
-        categories: ['Laki-laki'], // Dibungkus list biar gak error
+        category: 'Laki-laki', // Dibungkus list biar gak error
         price: 120.00,
         imageUrl: 'assets/images/hoodie.png',
         images: ['assets/images/hoodie_2.png', 'assets/images/hoodie_3.png'],
@@ -28,7 +29,7 @@ class FeaturedItems extends StatelessWidget {
       Product(
         id: '2',
         name: 'Jordan Shoes',
-        categories: ['Laki-laki', 'Promo'],
+        category: 'Laki-laki',
         price: 200.00,
         imageUrl: 'assets/images/jordan.png',
         images: ['assets/images/jordan.png', 'assets/images/jordan.png'],
@@ -40,7 +41,7 @@ class FeaturedItems extends StatelessWidget {
       Product(
         id: '3',
         name: 'Stylish Sofa',
-        categories: ['Promo'],
+        category: 'Promo',
         price: 350.00,
         imageUrl: 'assets/images/5.png',
         images: ['assets/images/4.png', 'assets/images/3.png'],
@@ -52,7 +53,7 @@ class FeaturedItems extends StatelessWidget {
       Product(
         id: '4',
         name: 'Adidas Shoes',
-        categories: ['Laki-laki', 'Perempuan', 'Anak-Anak'],
+        category: 'Laki-laki',
         price: 500.00,
         imageUrl: 'assets/images/adidas_shoe.png',
         images: [
@@ -85,6 +86,21 @@ class FeaturedItems extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   // Navigate to featured item screen
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          FeaturedItemScreen(),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                            return FadeTransition(
+                              opacity: animation,
+                              child: child,
+                            );
+                          },
+                      transitionDuration: Duration(milliseconds: 300),
+                    ),
+                  );
                 },
                 child: Text(
                   'View All',
@@ -105,14 +121,14 @@ class FeaturedItems extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemCount: featuredItems.length,
             itemBuilder: (context, index) {
-              final product = featuredItems [index];
+              final product = featuredItems[index];
               return Container(
                 margin: EdgeInsets.only(right: 16, left: index == 0 ? 0 : 10),
                 child: ProductCard(
                   product: product,
                   onTap: () {},
-                    // navigate to product detail screen
 
+                  // navigate to product detail screen
                 ),
               );
             },

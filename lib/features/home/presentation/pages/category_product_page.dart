@@ -20,8 +20,8 @@ class CategoryProductsPage extends StatelessWidget {
     final products = category == 'All'
         ? dummyProducts
         : dummyProducts
-            .where((p) => p.categories.any((c) => c.toLowerCase() == category.toLowerCase()))
-            .toList();
+              .where((p) => p.category.toLowerCase() == category.toLowerCase())
+              .toList();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -34,17 +34,20 @@ class CategoryProductsPage extends StatelessWidget {
               child: products.isEmpty
                   ? _EmptyCategoryState(category: category)
                   : GridView.builder(
-                      padding: const EdgeInsets.all(AppConstants.defaultPadding),
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 0.60, // Sesuai video
-                        crossAxisSpacing: 16,   // Sesuai video
-                        mainAxisSpacing: 16,    // Sesuai video
+                      padding: const EdgeInsets.all(
+                        AppConstants.defaultPadding,
                       ),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 0.60, // Sesuai video
+                            crossAxisSpacing: 16, // Sesuai video
+                            mainAxisSpacing: 16, // Sesuai video
+                          ),
                       itemCount: products.length,
                       itemBuilder: (context, index) {
                         final item = products[index]; // Di video pakenya 'item'
-                        
+
                         // Sesuai persis sama baris 41-45 di video
                         return AnimatedListItem(
                           index: index,
@@ -67,10 +70,7 @@ class CategoryProductsPage extends StatelessWidget {
         color: Colors.white,
         border: Border(bottom: BorderSide(color: Colors.grey[200]!, width: 1)),
       ),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16, 
-        vertical: 14,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       child: Row(
         children: [
           InkWell(
@@ -110,7 +110,7 @@ class _EmptyCategoryState extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        mainAxisSize: MainAxisSize.min, 
+        mainAxisSize: MainAxisSize.min,
         children: [
           const Icon(Icons.inbox_outlined, size: 56, color: Colors.grey),
           const SizedBox(height: 12),
@@ -118,15 +118,13 @@ class _EmptyCategoryState extends StatelessWidget {
             'No products found',
             style: GoogleFonts.outfit(
               fontSize: 18,
-              fontWeight: FontWeight.w700, 
+              fontWeight: FontWeight.w700,
             ),
           ),
           const SizedBox(height: 6),
           Text(
             'Try a different category or come back later.',
-            style: GoogleFonts.outfit(
-              color: Colors.grey[600],
-            ),
+            style: GoogleFonts.outfit(color: Colors.grey[600]),
           ),
         ],
       ),

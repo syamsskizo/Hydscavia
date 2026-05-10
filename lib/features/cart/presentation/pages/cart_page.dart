@@ -19,7 +19,7 @@ class CartPage extends StatelessWidget {
         imageUrl: 'assets/images/jordan.png',
         images: [],
         price: 499.99,
-        categories: ['Living Room'],
+        category: 'Living Room',
         colors: [],
       ),
       quantity: 2,
@@ -33,7 +33,7 @@ class CartPage extends StatelessWidget {
         description: 'A handcrafted wooden coffee table.',
         imageUrl: 'assets/images/coffee_table_1.png',
         price: 259.00,
-        categories: ['Living Room'],
+        category: 'Living Room',
         images: [],
         colors: [],
       ),
@@ -48,7 +48,7 @@ class CartPage extends StatelessWidget {
         imageUrl:
             'assets/images/dining_table.png', // Sesuai screenshot tutorialnya ya Syam
         price: 189.50,
-        categories: ['Office'],
+        category: 'Office',
         specialOfferIds: [],
         images: [],
         colors: [],

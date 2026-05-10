@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/common/constants/app_constants.dart';
+import 'package:flutter_application_1/features/home/presentation/pages/special_offers_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -21,28 +22,44 @@ class _SpecialOfferWidgetState extends State<SpecialOfferWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final offers = List.generate(3, (index) => {
-      'id': '$index',
-      'title': 'Special Offer ${index + 1}', 
-      'discount': 30 + index * 10,
-      'description': 'Save big on modern furniture',
-      'image': 'assets/images/adidas_shoe.png',
-    });
+    final offers = List.generate(
+      3,
+      (index) => {
+        'id': '$index',
+        'title': 'Special Offer ${index + 1}',
+        'discount': 30 + index * 10,
+        'description': 'Save big on modern furniture',
+        'image': 'assets/images/adidas_shoe.png',
+      },
+    );
 
     return Column(
       children: [
         SizedBox(
-          height: 190, // Gue turunin jadi 190 biar sisa 20px buat indikator di bawah
+          height:
+              190, // Gue turunin jadi 190 biar sisa 20px buat indikator di bawah
           child: PageView.builder(
             controller: _pageController,
             itemCount: offers.length,
             itemBuilder: (context, index) {
               final offer = offers[index];
               return GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  // navigate to special offers screen
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          SpecialOffersPage(offerId: offer['id']! as String),
+                    ),
+                  );
+                },
                 child: Container(
                   // Vertical margin gue kecilin biar gak nambah tinggi luar
-                  margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8), 
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
                     child: Stack(
@@ -61,11 +78,15 @@ class _SpecialOfferWidgetState extends State<SpecialOfferWidget> {
                             ),
                           ),
                         ),
-                        
+
                         // Dekorasi Lingkaran (Tetap sama)
                         Positioned(
-                          right: -30, bottom: -30,
-                          child: CircleAvatar(radius: 80, backgroundColor: Colors.white.withOpacity(0.1)),
+                          right: -30,
+                          bottom: -30,
+                          child: CircleAvatar(
+                            radius: 80,
+                            backgroundColor: Colors.white.withOpacity(0.1),
+                          ),
                         ),
 
                         // Gambar Produk (Gue kecilin dikit biar gak balapan sama teks)
@@ -84,13 +105,20 @@ class _SpecialOfferWidgetState extends State<SpecialOfferWidget> {
 
                         // Konten Teks & Button
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12), // Padding dalem diciutin
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 12,
+                          ), // Padding dalem diciutin
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center, // Center biar seimbang
+                            mainAxisAlignment: MainAxisAlignment
+                                .center, // Center biar seimbang
                             children: [
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 2,
+                                ),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(20),
@@ -128,15 +156,24 @@ class _SpecialOfferWidgetState extends State<SpecialOfferWidget> {
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.white,
                                   foregroundColor: AppConstants.primaryColor,
-                                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
-                                  minimumSize: const Size(0, 30), // Tombol lebih slim
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                    vertical: 0,
+                                  ),
+                                  minimumSize: const Size(
+                                    0,
+                                    30,
+                                  ), // Tombol lebih slim
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                 ),
                                 child: Text(
                                   'Shop Now',
-                                  style: GoogleFonts.outfit(fontSize: 12, fontWeight: FontWeight.bold),
+                                  style: GoogleFonts.outfit(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                             ],
@@ -163,8 +200,8 @@ class _SpecialOfferWidgetState extends State<SpecialOfferWidget> {
               activeDotColor: AppConstants.primaryColor,
               dotColor: Colors.blueGrey.shade200,
             ),
-          ), 
-        )
+          ),
+        ),
       ],
     );
   }

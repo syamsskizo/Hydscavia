@@ -4,7 +4,7 @@ class FullScreenImageViewer extends StatefulWidget {
   final List<String> images;
   final int initialIndex;
 
-  const FullScreenImageViewer({super.key});
+  const FullScreenImageViewer({super.key, required this.images, required this.initialIndex});
 
   @override
   State<FullScreenImageViewer> createState() => _FullScreenImageViewerState();

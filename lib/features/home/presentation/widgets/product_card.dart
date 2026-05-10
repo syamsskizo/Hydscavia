@@ -102,7 +102,7 @@ class ProductCard extends StatelessWidget {
 
                     const SizedBox(height: 4),
                     Text(
-                      product.categories.join(', '),
+                      product.category,
                       style: GoogleFonts.outfit(
                         fontSize: 12,
                         color: Colors.grey[600],

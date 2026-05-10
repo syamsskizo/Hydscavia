@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/common/constants/app_constants.dart';
 import 'package:flutter_application_1/features/auth/presentation/pages/auth_page.dart';
+import 'package:flutter_application_1/features/order/presentation/pages/my_order_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -54,6 +55,10 @@ class ProfilePage extends StatelessWidget {
                 color: Color(0xFF667eea),
                 onTap: () {
                   // navigate to my order page
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const MyOrderPage()),
+                  );
                 },
               ),
             ]),
@@ -151,9 +156,7 @@ class ProfilePage extends StatelessWidget {
             ],
           ),
           // INI YANG HILANG SEBELUMNYA
-          child: Column(
-            children: children, 
-          ),
+          child: Column(children: children),
         ),
       ],
     );
@@ -329,7 +332,7 @@ class ProfilePage extends StatelessWidget {
         ),
         // BUG FIX 2: Tadinya lo manggil 'value' lagi di sini
         Text(
-          label, 
+          label,
           style: GoogleFonts.outfit(fontSize: 12, color: Colors.grey[600]),
         ),
       ],

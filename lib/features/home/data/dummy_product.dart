@@ -5,7 +5,7 @@ final List<Product> dummyProducts = [
   Product(
     id: '1',
     name: 'Adidas Shoes',
-    categories: ['Anak-anak'],
+    category: 'Anak-anak',
     price: 120.00,
     imageUrl: 'assets/images/adidas_shoe.png',
     images: [
@@ -20,7 +20,7 @@ final List<Product> dummyProducts = [
   Product(
     id: '2',
     name: 'Stylish Sofa',
-    categories: ['Perempuan'],
+    category: 'Perempuan',
     price: 350.00,
     imageUrl: 'assets/images/hoodie.png', // Di video emang agak aneh namanya, sesuaikan aja Syam
     images: [
@@ -36,7 +36,7 @@ final List<Product> dummyProducts = [
   Product(
     id: '3',
     name: 'Wooden Table',
-    categories: ['Promo'],
+    category: 'Promo',
     price: 200.00,
     imageUrl: 'assets/images/3.png',
     images: [
@@ -51,7 +51,7 @@ final List<Product> dummyProducts = [
   Product(
     id: '4',
     name: 'Jordan Shoes',
-    categories: ['Perempuan', 'Laki-laki'],
+    category: 'Laki-laki',
     price: 500.00,
     imageUrl: 'assets/images/jordan.png',
     images: [

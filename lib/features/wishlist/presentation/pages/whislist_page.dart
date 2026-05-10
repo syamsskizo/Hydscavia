@@ -20,7 +20,7 @@ class WishlistPage extends StatelessWidget {
         imageUrl: 'assets/images/queen_bed.png',
         images: [],
         price: 199.99,
-        categories: ['Promo'],
+        category: 'Promo',
         colors: [],
       ),
       Product(
@@ -30,7 +30,7 @@ class WishlistPage extends StatelessWidget {
         imageUrl: 'assets/images/wardrobe.png',
         images: [],
         price: 199.99,
-        categories: ['Promo'],
+        category: 'Promo',
         colors: [],
       ),
     ];
@@ -139,8 +139,7 @@ class WishlistPage extends StatelessWidget {
                       isVertical: false,
                       child: Hero(
                         tag: 'wishlist_${item.id}',
-                        child: ProductCard(product: item,
-                        onTap: () {},),
+                        child: ProductCard(product: item, onTap: () {}),
                       ),
                     );
                   },
