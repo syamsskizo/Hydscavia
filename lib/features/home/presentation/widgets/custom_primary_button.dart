@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_nestjs_tutorial_project/core/common/constants/app_constants.dart';
+import 'package:flutter_application_1/core/common/constants/app_constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomPrimaryButton extends StatelessWidget {

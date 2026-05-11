@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/common/constants/app_constants.dart';
-import 'package:flutter_nestjs_tutorial_project/features/home/domain/entities/product.dart';
+import 'package:flutter_application_1/features/home/domain/entities/product.dart';
+import 'package:flutter_application_1/features/home/presentation/widgets/full_screen_image_viewer.dart';
+import 'package:flutter_application_1/features/home/presentation/widgets/product_details.dart';
+
 
 class ProductDetailPage extends StatefulWidget {
   final Product product;
@@ -128,12 +131,12 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      _buildCircleButton(
+                      _buildCircularButton(
                         icon: Icons.arrow_back,
                         onTap: () => Navigator.pop(context),
                       ),
                       _buildCircularButton(
-                        icon: icons.favorite_border,
+                        icon: Icons.favorite_border,
                         onTap: () {},
                       ),
                     ],
@@ -158,7 +161,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                             shape: BoxShape.circle,
                             color: _currentImageIndex == index
                                 ? AppConstants.primaryColor
-                                : Colors.grey(300),
+                                : Colors.grey[300],
                           ),
                         ),
                       ),

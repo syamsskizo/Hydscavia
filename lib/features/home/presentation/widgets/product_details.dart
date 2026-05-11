@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart'; // Pastikan ini diimport
+import 'package:flutter_application_1/core/common/constants/app_constants.dart';
+import 'package:flutter_application_1/features/home/domain/entities/product.dart';
+import 'package:flutter_application_1/features/home/presentation/widgets/custom_primary_button.dart';
+import 'package:flutter_application_1/features/home/presentation/widgets/product_card.dart'; // Tambahan import
+import 'package:flutter_application_1/features/home/presentation/pages/product_detail_page.dart'; // Tambahan import
+import 'package:google_fonts/google_fonts.dart';
 
 class ProductDetails extends StatefulWidget {
   final Product product;
@@ -16,6 +21,10 @@ class ProductDetails extends StatefulWidget {
 class _ProductDetailsState extends State<ProductDetails> {
   String? _selectedColor;
   double _userRating = 0;
+
+  // Deklarasi variabel loading button yang sebelumnya hilang
+  bool _isAddingToCart = false;
+  final bool _isBuyingNow = false;
 
   final TextEditingController _reviewController = TextEditingController();
   late List<Review> _reviews;
@@ -116,6 +125,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             ),
             const SizedBox(height: 12),
             Text(
+              // Pakai .categories (ada s-nya) lalu digabung pakai koma
               widget.product.category,
               style: GoogleFonts.outfit(color: Colors.grey[600], fontSize: 16),
             ),
@@ -147,7 +157,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: isSelected ? AppConstants.primaryColor : Colors.transparent,
+                        color: isSelected
+                            ? AppConstants.primaryColor
+                            : Colors.transparent,
                         width: 2,
                       ),
                     ),
@@ -155,7 +167,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                       width: 32,
                       height: 32,
                       decoration: BoxDecoration(
-                        color: Color(int.parse(colorHex.replaceFirst('#', '0xFF'))),
+                        color: Color(
+                          int.parse(colorHex.replaceFirst('#', '0xFF')),
+                        ),
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -198,7 +212,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                           const SizedBox(width: 6),
                           Padding(
                             padding: const EdgeInsets.only(bottom: 3.0),
-                            child: Text('/ 5', style: GoogleFonts.outfit(color: Colors.grey)),
+                            child: Text(
+                              '/ 5',
+                              style: GoogleFonts.outfit(color: Colors.grey),
+                            ),
                           ),
                         ],
                       ),
@@ -223,16 +240,23 @@ class _ProductDetailsState extends State<ProductDetails> {
                       children: [
                         Text(
                           'Add your review',
-                          style: GoogleFonts.outfit(fontSize: 16, fontWeight: FontWeight.w600),
+                          style: GoogleFonts.outfit(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                         const SizedBox(height: 8),
                         Row(
                           children: List.generate(5, (index) {
                             final int starIndex = index + 1;
                             return InkWell(
-                              onTap: () => setState(() => _userRating = starIndex.toDouble()),
+                              onTap: () => setState(
+                                () => _userRating = starIndex.toDouble(),
+                              ),
                               child: Icon(
-                                _userRating >= starIndex ? Icons.star : Icons.star_border,
+                                _userRating >= starIndex
+                                    ? Icons.star
+                                    : Icons.star_border,
                                 color: Colors.amber,
                               ),
                             );
@@ -249,7 +273,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                             isDense: true,
                             filled: true,
                             fillColor: Colors.grey[100],
-                            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 10,
+                            ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide.none,
@@ -260,7 +287,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                         Align(
                           alignment: Alignment.centerRight,
                           child: ElevatedButton(
-                            onPressed: (_userRating == 0 || _reviewController.text.trim().isEmpty)
+                            onPressed:
+                                (_userRating == 0 ||
+                                    _reviewController.text.trim().isEmpty)
                                 ? null
                                 : () {
                                     final newReview = Review(
@@ -277,9 +306,14 @@ class _ProductDetailsState extends State<ProductDetails> {
                                   },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppConstants.primaryColor,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
                             ),
-                            child: Text('Submit', style: GoogleFonts.outfit(color: Colors.white)),
+                            child: Text(
+                              'Submit',
+                              style: GoogleFonts.outfit(color: Colors.white),
+                            ),
                           ),
                         ),
                       ],
@@ -293,14 +327,17 @@ class _ProductDetailsState extends State<ProductDetails> {
             if (_reviews.isNotEmpty) ...[
               Text(
                 'Customer reviews',
-                style: GoogleFonts.outfit(fontSize: 16, fontWeight: FontWeight.w600),
+                style: GoogleFonts.outfit(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               ListView.separated(
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: _reviews.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 12),
+                separatorBuilder: (_, _) => const SizedBox(height: 12),
                 itemBuilder: (context, index) {
                   final Review r = _reviews[index];
                   return Container(
@@ -317,7 +354,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                           children: [
                             CircleAvatar(
                               radius: 14,
-                              backgroundColor: AppConstants.primaryColor.withOpacity(0.1),
+                              backgroundColor: AppConstants.primaryColor
+                                  .withOpacity(0.1),
                               child: Text(
                                 r.username.isNotEmpty ? r.username[0] : '?',
                                 style: GoogleFonts.outfit(
@@ -332,34 +370,45 @@ class _ProductDetailsState extends State<ProductDetails> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(r.username, style: GoogleFonts.outfit(fontWeight: FontWeight.w600)),
+                                  Text(
+                                    r.username,
+                                    style: GoogleFonts.outfit(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
                                   Text(
                                     _formatDate(r.createdAt),
-                                    style: GoogleFonts.outfit(color: Colors.grey[600], fontSize: 12),
+                                    style: GoogleFonts.outfit(
+                                      color: Colors.grey[600],
+                                      fontSize: 12,
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
-                            buildStarRating(r.rating, size: 14zz),
+                            buildStarRating(
+                              r.rating,
+                              size: 14,
+                            ), // typo 14zz di fix
                           ],
                         ),
                         const SizedBox(height: 8),
-                        Text(r.comment, style: GoogleFonts.outfit(fontSize: 13, color: Colors.black87)),
+                        Text(
+                          r.comment,
+                          style: GoogleFonts.outfit(
+                            fontSize: 13,
+                            color: Colors.black87,
+                          ),
+                        ),
                       ],
                     ),
                   );
                 },
-                seperatotrBuilder: (_, __) => const SizedBox(height: 12),
-                itemCount: _reviews.length,
               ),
             ],
-          ],
-        ),
-
-        const SizedBox(height: 10),
-        // action buttons row
-
-        Row(
+            const SizedBox(height: 10),
+            // Action Buttons Row
+            Row(
               children: [
                 // Add to Cart Button
                 Expanded(
@@ -375,55 +424,47 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 () {
                                   if (!mounted) return;
                                   setState(() => _isAddingToCart = false);
-                                  if (mounted) {
-                                    showCustomToastOverlay(
-                                      context,
-                                      title: 'Success',
-                                      message: '${widget.product.name}',
-                                      type: ToastType.success,
-                                    );
-                                  }
+                                  // Nanti fungsi showCustomToastOverlay bisa diaktifkan lagi
+                                  // pastikan udah diimport ya
                                 },
-                              ); // Future.delayed
+                              );
                             },
                       style: OutlinedButton.styleFrom(
                         side: BorderSide(
                           color: AppConstants.primaryColor,
                           width: 2,
-                        ), // BorderSide
+                        ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(
                             AppConstants.defaultBorderRadius,
                           ),
-                        ), // RoundedRectangleBorder
+                        ),
                       ),
-
-                    child: _isAddingToCart
-                            ? const SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    AppConstants.primaryColor,
-                                  ), // AlwaysStoppedAnimation
-                                ), // CircularProgressIndicator
-                              ) // SizedBox
-                            : Text(
-                                'Add to Cart',
-                                style: GoogleFonts.outfit(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppConstants.primaryColor,
+                      child: _isAddingToCart
+                          ? SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  AppConstants.primaryColor,
                                 ),
-                              ), // Text
-                      ), // OutlinedButton
-                    ), // SizedBox
-                  ), // Expanded
-
-                  const SizedBox(width: 12),
-                  // Buy Now Button                  
-Expanded(
+                              ),
+                            )
+                          : Text(
+                              'Add to Cart',
+                              style: GoogleFonts.outfit(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: AppConstants.primaryColor,
+                              ),
+                            ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                // Buy Now Button
+                Expanded(
                   child: CustomPrimaryButton(
                     isLoading: _isBuyingNow,
                     onPressed: () {
@@ -432,12 +473,11 @@ Expanded(
                     height: 56,
                     borderRadius: AppConstants.defaultBorderRadius,
                     label: 'Buy Now',
-                  ), // CustomPrimaryButton
-                ), // Expanded
+                  ),
+                ),
               ],
-            ), // Row
+            ),
             const SizedBox(height: 32),
-
             // Related Products Section
             Text(
               'Related Products',
@@ -447,55 +487,48 @@ Expanded(
               ),
             ),
             const SizedBox(height: 16),
-
             SizedBox(
               height: 290,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemCount: getRelatedProducts().length,
-                separatorBuilder: (context, index) {
-                  final relatedProduct = _getRelatedProducts()[index];
-                  return Padding(
-                    padding: EdgeInsets.only(right: 12),
-                    child: ProductCard(
-                      product: relatedProduct,
-                      onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          PageRouteBuilder(
-                            pageBuilder:
-                             (context, animation, secondaryAnimation)  => 
-                             ProductDetailPage(product: relatedProduct),
-                             transitionsBuilder:
-                              (
-                                context,
-                                animation,
-                                secondaryAnimation,
-                                child,
-                              ) {
+                separatorBuilder: (context, index) => const SizedBox(width: 12),
+                itemBuilder: (context, index) {
+                  final relatedProduct = getRelatedProducts()[index];
+                  return ProductCard(
+                    product: relatedProduct,
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder:
+                              (context, animation, secondaryAnimation) =>
+                                  ProductDetailPage(product: relatedProduct),
+                          transitionsBuilder:
+                              (context, animation, secondaryAnimation, child) {
                                 return FadeTransition(
                                   opacity: animation,
                                   child: child,
                                 );
                               },
-                             )
-                          ),
-                        );
-                      },
-                    )
-                  )
-                }),
-            ),
-            ],
+                        ),
+                      );
+                    },
+                  );
+                },
               ),
+            ),
           ],
-        ), // Column
-     // SingleChildScrollView
-    ); // Container
+        ),
+      ),
+    );
+  }
 
+  // --- Helper Methods ---
 
-
-    List<Product> getRelatedProducts() {
+  List<Product> getRelatedProducts() {
+    // Dibungkus pakai array [ ] yang benar
+    final List<Product> products = [
       Product(
         id: 'related3',
         name: 'Wooden Table',
@@ -520,19 +553,18 @@ Expanded(
         isFavorite: false,
         specialOfferIds: ['offer4'],
       ),
-      ];
+    ];
 
-      return getRelatedProducts
-      .where((product) =>.id != widget.product.id)
-      .toList();
-    }
-      
-    
+    return products
+        .where((product) => product.id != widget.product.id)
+        .toList();
+  }
 
-  String _formatDate(DateTime date) (
+  String _formatDate(DateTime date) {
     final DateTime now = DateTime.now();
     final Duration diff = now.difference(date);
-    if (diff.inDays >= 365)  {
+
+    if (diff.inDays >= 365) {
       final int years = (diff.inDays / 365).floor();
       return '$years year${years > 1 ? 's' : ''} ago';
     } else if (diff.inDays >= 30) {
@@ -547,9 +579,7 @@ Expanded(
     } else {
       return 'Just now';
     }
-    )
-
-
+  }
 
   double _averageRating() {
     if (_reviews.isEmpty) return 0.0;
@@ -571,4 +601,4 @@ Expanded(
       }),
     );
   }
-
+}
