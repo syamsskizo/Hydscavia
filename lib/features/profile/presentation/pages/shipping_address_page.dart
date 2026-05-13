@@ -188,16 +188,16 @@ class _ShippingAddressPageState extends State<ShippingAddressPage> {
                   const SizedBox(height: 8),
                   _buildTextField(controller: nameCtrl, label: 'Full Name'),
                   _buildTextField(
-                    controller: nameCtrl,
+                    controller: phoneCtrl,
                     label: 'Phone',
                     keyboardType: TextInputType.phone,
                   ),
                   _buildTextField(
-                    controller: nameCtrl,
+                    controller: line1Ctrl,
                     label: 'Address line 1',
                   ),
                   _buildTextField(
-                    controller: nameCtrl,
+                    controller: line2Ctrl,
                     label: 'Address line 2 (optional)',
                     required: false,
                   ),

@@ -4,6 +4,7 @@ import 'package:flutter_application_1/features/auth/presentation/pages/auth_page
 import 'package:flutter_application_1/features/order/presentation/pages/my_order_page.dart';
 import 'package:flutter_application_1/features/profile/presentation/pages/help_center_screen.dart';
 import 'package:flutter_application_1/features/profile/presentation/pages/shipping_address_page.dart';
+import 'package:flutter_application_1/features/profile/presentation/settings_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -137,7 +138,6 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  // BUG FIX 1: children tadinya nggak dipanggil di dalem Container
   Widget _buildMenuGroup(String title, List<Widget> children) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -340,7 +340,6 @@ class ProfilePage extends StatelessWidget {
             color: Colors.black87,
           ),
         ),
-        // BUG FIX 2: Tadinya lo manggil 'value' lagi di sini
         Text(
           label,
           style: GoogleFonts.outfit(fontSize: 12, color: Colors.grey[600]),
@@ -373,6 +372,10 @@ class ProfilePage extends StatelessWidget {
           IconButton(
             onPressed: () {
               //navigate to settings page
+               Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const SettingsPage()),
+                  );
             },
             icon: Icon(Icons.settings_outlined, color: Colors.black),
           ),
