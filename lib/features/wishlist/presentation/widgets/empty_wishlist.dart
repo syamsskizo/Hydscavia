@@ -19,7 +19,7 @@ class EmptyWishlist extends StatelessWidget {
             Text(
               "Your wishlist is empty",
               textAlign: TextAlign.center, // Bikin teks di tengah
-              style: AppConstants.TitleStyle.copyWith(
+              style: AppConstants.titleStyle.copyWith(
                 color: Colors.grey[600],
                 fontSize: 18,
               ),
@@ -28,7 +28,7 @@ class EmptyWishlist extends StatelessWidget {
             Text(
               "Save items you like by tapping the heart icon",
               textAlign: TextAlign.center, // Bikin teks di tengah
-              style: AppConstants.TitleStyle.copyWith(
+              style: AppConstants.titleStyle.copyWith(
                 color: Colors.grey,
                 fontSize: 14,
                 fontWeight: FontWeight.normal,

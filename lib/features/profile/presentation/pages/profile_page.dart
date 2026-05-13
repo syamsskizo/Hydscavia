@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/common/constants/app_constants.dart';
 import 'package:flutter_application_1/features/auth/presentation/pages/auth_page.dart';
 import 'package:flutter_application_1/features/order/presentation/pages/my_order_page.dart';
+import 'package:flutter_application_1/features/profile/presentation/pages/help_center_screen.dart';
+import 'package:flutter_application_1/features/profile/presentation/pages/shipping_address_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -71,6 +73,10 @@ class ProfilePage extends StatelessWidget {
                 color: Color(0xFFFF9800),
                 onTap: () {
                   // navigate to Shipping addresspage
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const ShippingAddressPage()),
+                  );
                 },
               ),
               _buildMenuItem(
@@ -92,6 +98,10 @@ class ProfilePage extends StatelessWidget {
                 color: Color(0xFF607D8B),
                 onTap: () {
                   // navigate to HelpCentrescreen
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const HelpCenterScreen()),
+                  );
                 },
               ),
               _buildMenuItem(

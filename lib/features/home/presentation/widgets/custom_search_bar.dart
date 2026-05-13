@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/common/constants/app_constants.dart';
+import 'package:flutter_application_1/features/home/presentation/pages/search_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomSearchBar extends StatelessWidget {

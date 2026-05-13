@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/common/constants/app_constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-// Catatan: Pastikan AppConstants sudah didefinisikan di project Anda
-class AppConstants {
-  static const double defaultPadding = 16.0;
-}
 
 class HelpCenterScreen extends StatefulWidget {
   const HelpCenterScreen({super.key});

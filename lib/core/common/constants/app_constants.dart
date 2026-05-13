@@ -17,7 +17,7 @@ class AppConstants {
         color: textColor
       );
 
-  static TextStyle get TitleStyle => GoogleFonts.outfit(
+  static TextStyle get titleStyle => GoogleFonts.outfit(
         fontSize: 18,
         fontWeight: FontWeight.w600,
         color: textColor
