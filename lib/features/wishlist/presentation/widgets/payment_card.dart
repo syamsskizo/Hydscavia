@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/common/constants/app_constants.dart';
 import 'package:flutter_application_1/features/profile/domain/entities/card_model.dart';
-import 'package:flutter_nestjs_tutorial_project/features/profile/domain/entities/card_model.dart';
+import 'package:flutter_application_1/features/profile/presentation/widgets/default_pill.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PaymentCard extends StatelessWidget {
   final CardModel card;

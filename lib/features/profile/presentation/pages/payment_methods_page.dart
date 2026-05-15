@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/common/constants/app_constants.dart';
+import 'package:flutter_application_1/features/home/presentation/widgets/custom_primary_button.dart';
 import 'package:flutter_application_1/features/profile/domain/entities/card_model.dart';
 import 'package:flutter_application_1/features/wishlist/presentation/widgets/payment_card.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -54,7 +56,8 @@ class _PaymentMethodsPageState extends State<PaymentMethodsPage> {
                     onEdit: () => _edit(index),
                   );
                 },
-                separatorBuilder: (context, index) => const SizedBox(height: 12),
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: 12),
                 itemCount: _cards.length,
               ),
             ),
@@ -207,8 +210,8 @@ class _PaymentMethodsPageState extends State<PaymentMethodsPage> {
                         nameOnCard: nameCtrl.text.trim(),
                         last4: numberCtrl.text.trim().isNotEmpty
                             ? numberCtrl.text.trim().substring(
-                                  numberCtrl.text.trim().length - 4,
-                                )
+                                numberCtrl.text.trim().length - 4,
+                              )
                             : '0000',
                         expiry: expiryCtrl.text.trim(),
                         isDefault: isDefault,
@@ -286,7 +289,10 @@ class _PaymentMethodsPageState extends State<PaymentMethodsPage> {
           isDense: true,
           filled: true,
           fillColor: Colors.grey[100],
-          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 12,
+            vertical: 12,
+          ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide.none,
@@ -304,9 +310,7 @@ class _PaymentMethodsPageState extends State<PaymentMethodsPage> {
       ),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border(
-          bottom: BorderSide(color: Colors.grey[200]!, width: 1),
-        ),
+        border: Border(bottom: BorderSide(color: Colors.grey[200]!, width: 1)),
       ),
       child: Row(
         children: [

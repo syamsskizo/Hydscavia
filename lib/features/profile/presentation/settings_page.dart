@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_nestjs_tutorial_project/core/common/constants/app_constants.dart';
+import 'package:flutter_application_1/core/common/constants/app_constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -44,8 +44,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         _SwitchTile(
                           icon: Icons.local_shipping_outlined,
                           label: 'order Updates',
-                          subtitle:
-                              'Get notified about your order status',
+                          subtitle: 'Get notified about your order status',
                           value: notifyOrders,
                           onChanged: (value) =>
                               setState(() => notifyOrders = value),
@@ -53,18 +52,14 @@ class _SettingsPageState extends State<SettingsPage> {
 
                         const SizedBox(height: 12),
 
-                        Divider(
-                          height: 1,
-                          color: Colors.grey[100],
-                        ),
+                        Divider(height: 1, color: Colors.grey[100]),
 
                         const SizedBox(height: 12),
 
                         _SwitchTile(
                           icon: Icons.local_offer_outlined,
                           label: 'Promotions',
-                          subtitle:
-                              'Be the first to know about deals',
+                          subtitle: 'Be the first to know about deals',
                           value: notifyPromotions,
                           onChanged: (value) =>
                               setState(() => notifyPromotions = value),
@@ -72,18 +67,14 @@ class _SettingsPageState extends State<SettingsPage> {
 
                         const SizedBox(height: 12),
 
-                        Divider(
-                          height: 1,
-                          color: Colors.grey[100],
-                        ),
+                        Divider(height: 1, color: Colors.grey[100]),
 
                         const SizedBox(height: 12),
 
                         _SwitchTile(
                           icon: Icons.trending_down_outlined,
                           label: 'Price Drops',
-                          subtitle:
-                              'Get alerts for items you view',
+                          subtitle: 'Get alerts for items you view',
                           value: notifyPriceDrops,
                           onChanged: (value) =>
                               setState(() => notifyPriceDrops = value),
@@ -91,10 +82,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
                         const SizedBox(height: 12),
 
-                        Divider(
-                          height: 1,
-                          color: Colors.grey[100],
-                        ),
+                        Divider(height: 1, color: Colors.grey[100]),
 
                         const SizedBox(height: 12),
                       ],
@@ -109,24 +97,19 @@ class _SettingsPageState extends State<SettingsPage> {
                         _NavTile(
                           icon: Icons.privacy_tip_outlined,
                           label: 'Privacy Policy',
-                          onTap: () =>
-                              print('Privacy Policy tapped'),
+                          onTap: () => print('Privacy Policy tapped'),
                         ),
 
                         const SizedBox(height: 12),
 
-                        Divider(
-                          height: 1,
-                          color: Colors.grey[100],
-                        ),
+                        Divider(height: 1, color: Colors.grey[100]),
 
                         const SizedBox(height: 12),
 
                         _NavTile(
                           icon: Icons.article_outlined,
                           label: 'Terms of Service',
-                          onTap: () =>
-                              print('Terms of Service tapped'),
+                          onTap: () => print('Terms of Service tapped'),
                         ),
                       ],
                     ),
@@ -140,30 +123,22 @@ class _SettingsPageState extends State<SettingsPage> {
                         _NavTile(
                           icon: Icons.privacy_tip_outlined,
                           label: 'Privacy Policy',
-                          onTap: () =>
-                              print('Privacy Policy tapped'),
+                          onTap: () => print('Privacy Policy tapped'),
                         ),
 
                         const SizedBox(height: 12),
 
-                        Divider(
-                          height: 1,
-                          color: Colors.grey[100],
-                        ),
+                        Divider(height: 1, color: Colors.grey[100]),
 
                         const SizedBox(height: 12),
 
                         _NavTile(
                           icon: Icons.info_outlined,
                           label: 'About',
-                          onTap: () =>
-                              print('Terms of Service tapped'),
+                          onTap: () => print('Terms of Service tapped'),
                         ),
 
-                        Divider(
-                          height: 1,
-                          color: Colors.grey[100],
-                        ),
+                        Divider(height: 1, color: Colors.grey[100]),
 
                         _StaticTile(
                           icon: Icons.verified_outlined,
@@ -199,12 +174,7 @@ class _SettingsPageState extends State<SettingsPage> {
       decoration: BoxDecoration(
         color: Colors.white,
 
-        border: Border(
-          bottom: BorderSide(
-            color: Colors.grey[200]!,
-            width: 1,
-          ),
-        ),
+        border: Border(bottom: BorderSide(color: Colors.grey[200]!, width: 1)),
       ),
 
       child: Row(
@@ -221,10 +191,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 shape: BoxShape.circle,
               ),
 
-              child: Icon(
-                Icons.arrow_back_ios_new,
-                size: 18,
-              ),
+              child: Icon(Icons.arrow_back_ios_new, size: 18),
             ),
           ),
 
@@ -258,10 +225,7 @@ class _StaticTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 12,
-        vertical: 12,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
 
       child: Row(
         children: [
@@ -273,10 +237,7 @@ class _StaticTile extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
 
-            child: Icon(
-              icon,
-              color: Colors.black87,
-            ),
+            child: Icon(icon, color: Colors.black87),
           ),
 
           const SizedBox(width: 12),
@@ -315,10 +276,7 @@ class _NavTile extends StatelessWidget {
       borderRadius: BorderRadius.circular(16),
 
       child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 12,
-        ),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
 
         child: Row(
           children: [
@@ -330,10 +288,7 @@ class _NavTile extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
 
-              child: Icon(
-                icon,
-                color: Colors.black87,
-              ),
+              child: Icon(icon, color: Colors.black87),
             ),
 
             const SizedBox(width: 12),
@@ -400,10 +355,7 @@ class _SwitchTile extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
 
-            child: Icon(
-              icon,
-              color: Colors.black87,
-            ),
+            child: Icon(icon, color: Colors.black87),
           ),
 
           const SizedBox(width: 12),
@@ -454,9 +406,7 @@ class _SwitchTile extends StatelessWidget {
 class _CardContainer extends StatelessWidget {
   final List<Widget> children;
 
-  const _CardContainer({
-    required this.children,
-  });
+  const _CardContainer({required this.children});
 
   @override
   Widget build(BuildContext context) {
@@ -467,9 +417,7 @@ class _CardContainer extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: Colors.grey[200]!,
-        ),
+        border: Border.all(color: Colors.grey[200]!),
 
         boxShadow: [
           BoxShadow(
@@ -480,9 +428,7 @@ class _CardContainer extends StatelessWidget {
         ],
       ),
 
-      child: Column(
-        children: children,
-      ),
+      child: Column(children: children),
     );
   }
 }
@@ -495,10 +441,7 @@ class _SectionTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
-        left: 4,
-        bottom: 12,
-      ),
+      padding: EdgeInsets.only(left: 4, bottom: 12),
 
       child: Text(
         text,
