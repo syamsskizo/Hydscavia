@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/common/constants/app_constants.dart';
+import 'package:flutter_application_1/features/home/domain/entities/product.dart';
+import 'package:flutter_application_1/features/home/presentation/pages/product_detail_page.dart';
+import 'package:flutter_application_1/features/home/presentation/widgets/animated_list_item.dart';
+import 'package:flutter_application_1/features/home/presentation/widgets/product_card.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -27,9 +33,9 @@ class _SearchScreenState extends State<SearchScreen> {
       category: 'Electronics',
       price: 1099.0,
       imageUrl:
-          'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-14-pro-model-unselect-gallery-1-202209',
+          'assets/images/hoodie_3.png',
       images: [
-        'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-pro-model-unselect-gallery-3-202209',
+        'assets/images/hoodie_3.png',
       ],
       description:
           'Apple iPhone 14 Pro with 128GB storage, A16 Bionic chip, Dynamic Island, and Pro Camera System.',
@@ -43,9 +49,9 @@ class _SearchScreenState extends State<SearchScreen> {
       category: 'Footwear',
       price: 150.0,
       imageUrl:
-          'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/a4b6e321-57c3-4230-9e20-c8c5bcb631fd/air-max-270-shoes-V4D99k.png',
+          'assets/images/book_shelf_2.png',
       images: [
-        'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/d255f7e0-c4e0-4e40-bf2b-5b7a3349c1eb/air-max-270-shoes-V4D99k.png',
+        'assets/images/book_shelf_2.png',
       ],
       description:
           'Nike Air Max 270 with lightweight cushioning and a bold heel unit for all-day comfort.',
@@ -57,9 +63,9 @@ class _SearchScreenState extends State<SearchScreen> {
       category: 'Wearables',
       price: 299.99,
       imageUrl:
-          'https://images.samsung.com/is/image/samsung/p6pim/levant/sm-r960nzsamea/gallery/levant-galaxy-watch6-47mm-sm-r960nzsamea-537401211',
+          'assets/images.dining_table_3.png',
       images: [
-        'https://images.samsung.com/is/image/samsung/p6pim/levant/sm-r960nzsamea/gallery/levant-galaxy-watch6-47mm-sm-r960nzsamea-537401211',
+        'assets/images/dining_table_3.png',
       ],
       description:
           'Stay connected and track your health with the new Galaxy Watch 6. AMOLED display and up to 40 hours of battery life.',
@@ -71,9 +77,9 @@ class _SearchScreenState extends State<SearchScreen> {
       category: 'Accessories',
       price: 65.0,
       imageUrl:
-          'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/f1f30290cfb24931a5dfad5200df0fa9_9366/Adidas_Originals_Backpack_Black_EV7554_01_standard.jpg',
+          'assets/images/adidas_shoe.png',
       images: [
-        'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/681ca21233a3429c9b9cad5200df160f_9366/Adidas_Originals_Backpack_Black_EV7554_02_standard_hover.jpg',
+        'assets/images/adidas_shoe.png',
       ],
       description:
           'Classic Adidas backpack with spacious compartments and minimalist design.',
@@ -189,7 +195,7 @@ class _SearchScreenState extends State<SearchScreen> {
     padding: EdgeInsets.all(AppConstants.defaultPadding),
     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: 2,
-      childAspectRatio: 0.65,
+      childAspectRatio: 0.6,
       crossAxisSpacing: 16,
       mainAxisSpacing: 16,
     ), // SliverGridDelegateWithFixedCrossAxisCount
@@ -380,7 +386,22 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  IconData _getCategoryIcon(String category) {
-    Switch
+ IconData _getCategoryIcon(String category) {
+    switch (category.toLowerCase()) {
+      case 'electronics':
+        return Icons.electrical_services;
+      case 'clothing':
+        return Icons.checkroom;
+      case 'shoes':
+        return Icons.directions_walk;
+      case 'accessories':
+        return Icons.backpack;
+      case 'home appliances':
+        return Icons.kitchen;
+      case 'wearables':
+        return Icons.watch;
+      default:
+        return Icons.category;
+    }
   }
 }

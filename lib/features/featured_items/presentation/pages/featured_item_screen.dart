@@ -222,7 +222,7 @@ class _FeaturedItemScreenState extends State<FeaturedItemScreen> {
                         const SizedBox(height: 16),
                         Text(
                           'No featured item available',
-                          style: AppConstants.TitleStyle.copyWith(
+                          style: AppConstants.titleStyle.copyWith(
                             color: Colors.grey[600],
                             fontSize: 18,
                           ),
