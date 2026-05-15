@@ -32,11 +32,8 @@ class _SearchScreenState extends State<SearchScreen> {
       name: 'Apple iPhone 14 Pro',
       category: 'Electronics',
       price: 1099.0,
-      imageUrl:
-          'assets/images/hoodie_3.png',
-      images: [
-        'assets/images/hoodie_3.png',
-      ],
+      imageUrl: 'assets/images/hoodie_3.png',
+      images: ['assets/images/hoodie_3.png'],
       description:
           'Apple iPhone 14 Pro with 128GB storage, A16 Bionic chip, Dynamic Island, and Pro Camera System.',
       colors: ['#1c1c1e', '#f5f5f7'],
@@ -48,11 +45,8 @@ class _SearchScreenState extends State<SearchScreen> {
       name: 'Nike Air Max 270',
       category: 'Footwear',
       price: 150.0,
-      imageUrl:
-          'assets/images/book_shelf_2.png',
-      images: [
-        'assets/images/book_shelf_2.png',
-      ],
+      imageUrl: 'assets/images/book_shelf_2.png',
+      images: ['assets/images/book_shelf_2.png'],
       description:
           'Nike Air Max 270 with lightweight cushioning and a bold heel unit for all-day comfort.',
       colors: ['#000000', '#ffffff'],
@@ -62,11 +56,8 @@ class _SearchScreenState extends State<SearchScreen> {
       name: 'Samsung Galaxy Watch 6',
       category: 'Wearables',
       price: 299.99,
-      imageUrl:
-          'assets/images.dining_table_3.png',
-      images: [
-        'assets/images/dining_table_3.png',
-      ],
+      imageUrl: 'assets/images.dining_table_3.png',
+      images: ['assets/images/dining_table_3.png'],
       description:
           'Stay connected and track your health with the new Galaxy Watch 6. AMOLED display and up to 40 hours of battery life.',
       colors: ['#b0b0b0', '#333333'],
@@ -76,11 +67,8 @@ class _SearchScreenState extends State<SearchScreen> {
       name: 'Adidas Originals Backpack',
       category: 'Accessories',
       price: 65.0,
-      imageUrl:
-          'assets/images/adidas_shoe.png',
-      images: [
-        'assets/images/adidas_shoe.png',
-      ],
+      imageUrl: 'assets/images/adidas_shoe.png',
+      images: ['assets/images/adidas_shoe.png'],
       description:
           'Classic Adidas backpack with spacious compartments and minimalist design.',
       colors: ['#000000'],
@@ -108,10 +96,7 @@ class _SearchScreenState extends State<SearchScreen> {
     final String query = _searchController.text;
 
     final List<Product> filteredItems = dummyItems
-        .where(
-          (item) =>
-              item.name.toLowerCase().contains(query.toLowerCase()),
-        )
+        .where((item) => item.name.toLowerCase().contains(query.toLowerCase()))
         .toList();
 
     return Scaffold(
@@ -122,8 +107,7 @@ class _SearchScreenState extends State<SearchScreen> {
           color: Colors.white,
           child: SafeArea(
             child: Padding(
-              padding:
-                  const EdgeInsets.all(AppConstants.defaultPadding),
+              padding: const EdgeInsets.all(AppConstants.defaultPadding),
               child: Row(
                 children: [
                   GestureDetector(
@@ -134,10 +118,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         color: Colors.grey[100],
                         borderRadius: BorderRadius.circular(8),
                       ), // BoxDecoration
-                      child: const Icon(
-                        Icons.arrow_back,
-                        size: 20,
-                      ),
+                      child: const Icon(Icons.arrow_back, size: 20),
                     ), // Container
                   ), // GestureDetector
 
@@ -153,22 +134,20 @@ class _SearchScreenState extends State<SearchScreen> {
                         decoration: InputDecoration(
                           hintText: 'Search products...',
                           prefixIcon: const Icon(Icons.search),
-                          suffixIcon:
-                              _searchController.text.isNotEmpty
-                                  ? IconButton(
-                                      onPressed: () {
-                                        _searchController.clear();
-                                        setState(() {});
-                                      },
-                                      icon: const Icon(
-                                        Icons.clear,
-                                        color: Colors.grey,
-                                      ),
-                                    )
-                                  : null,
+                          suffixIcon: _searchController.text.isNotEmpty
+                              ? IconButton(
+                                  onPressed: () {
+                                    _searchController.clear();
+                                    setState(() {});
+                                  },
+                                  icon: const Icon(
+                                    Icons.clear,
+                                    color: Colors.grey,
+                                  ),
+                                )
+                              : null,
                           border: InputBorder.none,
-                          contentPadding:
-                              const EdgeInsets.symmetric(
+                          contentPadding: const EdgeInsets.symmetric(
                             horizontal: 16,
                             vertical: 12,
                           ),
@@ -185,98 +164,80 @@ class _SearchScreenState extends State<SearchScreen> {
       body: query.isEmpty
           ? _buildSuggestedSearches()
           : filteredItems.isEmpty
-              ? _buildNoResults()
-              : _buildSearchResults(filteredItems),
+          ? _buildNoResults()
+          : _buildSearchResults(filteredItems),
     ); // Scaffold
   }
 
- Widget _buildSearchResults(List<Product> items) {
-  return GridView.builder(
-    padding: EdgeInsets.all(AppConstants.defaultPadding),
-    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: 2,
-      childAspectRatio: 0.6,
-      crossAxisSpacing: 16,
-      mainAxisSpacing: 16,
-    ), // SliverGridDelegateWithFixedCrossAxisCount
-    itemCount: items.length,
-    itemBuilder: (context, index) {
-      final item = items[index];
+  Widget _buildSearchResults(List<Product> items) {
+    return GridView.builder(
+      padding: EdgeInsets.all(AppConstants.defaultPadding),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 0.6,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16,
+      ), // SliverGridDelegateWithFixedCrossAxisCount
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        final item = items[index];
 
-      return AnimatedListItem(
-        index: index,
-        isVertical: false,
-        child: Hero(
-          tag: 'search_${item.id}',
-          child: ProductCard(
-            product: item,
-            onTap: () {
-              Navigator.push(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (_, __, ___) =>
-                      ProductDetailPage(product: item),
-                  transitionsBuilder: (
-                    context,
-                    animation,
-                    secondaryAnimation,
-                    child,
-                  ) =>
-                      FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  ),
-                  transitionDuration: Duration(milliseconds: 300),
-                ), // PageRouteBuilder
-              );
-            },
-          ), // ProductCard
-        ), // Hero
-      ); // AnimatedListItem
-    },
-  ); // GridView.builder
-}
+        return AnimatedListItem(
+          index: index,
+          isVertical: false,
+          child: Hero(
+            tag: 'search_${item.id}',
+            child: ProductCard(
+              product: item,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (_, _, _) => ProductDetailPage(product: item),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) =>
+                            FadeTransition(opacity: animation, child: child),
+                    transitionDuration: Duration(milliseconds: 300),
+                  ), // PageRouteBuilder
+                );
+              },
+            ), // ProductCard
+          ), // Hero
+        ); // AnimatedListItem
+      },
+    ); // GridView.builder
+  }
 
   Widget _buildNoResults() {
-  return Center(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(
-          Icons.search_off_rounded,
-          size: 64,
-          color: Colors.grey[400],
-        ),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.search_off_rounded, size: 64, color: Colors.grey[400]),
 
-        const SizedBox(height: 16),
+          const SizedBox(height: 16),
 
-        Text(
-          'No items found',
-          style: AppConstants.titleStyle.copyWith(
-            color: Colors.grey[600],
-            fontSize: 18,
-          ),
-        ), // Text
+          Text(
+            'No items found',
+            style: AppConstants.titleStyle.copyWith(
+              color: Colors.grey[600],
+              fontSize: 18,
+            ),
+          ), // Text
 
-        const SizedBox(height: 8),
+          const SizedBox(height: 8),
 
-        Text(
-          'Try searching with different keywords',
-          style: AppConstants.bodyStyle.copyWith(
-            color: Colors.grey[500],
-          ),
-        ), // Text
-      ],
-    ), // Column
-  ); // Center
-}
+          Text(
+            'Try searching with different keywords',
+            style: AppConstants.bodyStyle.copyWith(color: Colors.grey[500]),
+          ), // Text
+        ],
+      ), // Column
+    ); // Center
+  }
 
   Widget _buildSuggestedSearches() {
-    final popularTerms = [
-      'iPhone 14 Pro',
-      'Nike Air Max',
-      'Adidas Backpack',
-    ];
+    final popularTerms = ['iPhone 14 Pro', 'Nike Air Max', 'Adidas Backpack'];
 
     return SingleChildScrollView(
       padding: EdgeInsets.all(AppConstants.defaultPadding),
@@ -298,16 +259,16 @@ class _SearchScreenState extends State<SearchScreen> {
           Wrap(
             spacing: 12,
             runSpacing: 12,
-           children: popularTerms.map((term) {
-  return _buildSuggestionChip(
-    label: term,
-    onTap: () {
-      _searchController.text = term;
-      setState(() {});
-    },
-    icon: _getSearchTermIcon(term),
-  );
-}).toList(),
+            children: popularTerms.map((term) {
+              return _buildSuggestionChip(
+                label: term,
+                onTap: () {
+                  _searchController.text = term;
+                  setState(() {});
+                },
+                icon: _getSearchTermIcon(term),
+              );
+            }).toList(),
           ), // Wrap
         ],
       ), // Column
@@ -315,26 +276,24 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   IconData _getSearchTermIcon(String term) {
-  if (term.toLowerCase().contains('iphone')) {
-    return Icons.phone_iphone;
+    if (term.toLowerCase().contains('iphone')) {
+      return Icons.phone_iphone;
+    }
+
+    if (term.toLowerCase().contains('nike')) {
+      return Icons.directions_run;
+    }
+
+    if (term.toLowerCase().contains('smartwatch')) {
+      return Icons.watch;
+    }
+
+    if (term.toLowerCase().contains('backpack')) {
+      return Icons.backpack;
+    }
+
+    return Icons.search_rounded;
   }
-
-  if (term.toLowerCase().contains('nike')) {
-    return Icons.directions_run;
-  }
-
-  if (term.toLowerCase().contains('smartwatch')) {
-    return Icons.watch;
-  }
-
-  if (term.toLowerCase().contains('backpack')) {
-    return Icons.backpack;
-  }
-
-  return Icons.search_rounded;
-}
-
-  
 
   Widget _buildSuggestionChip({
     required String label,
@@ -347,15 +306,10 @@ class _SearchScreenState extends State<SearchScreen> {
         onTap: onTap,
         borderRadius: BorderRadius.circular(12),
         child: Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 12,
-          ),
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           decoration: BoxDecoration(
             color: Colors.grey[50],
-            border: Border.all(
-              color: Colors.grey.shade300,
-            ),
+            border: Border.all(color: Colors.grey.shade300),
             borderRadius: BorderRadius.circular(12),
           ), // BoxDecoration
           child: Row(
@@ -364,9 +318,7 @@ class _SearchScreenState extends State<SearchScreen> {
               Icon(
                 icon,
                 size: 18,
-                color: AppConstants.primaryColor.withValues(
-                  alpha: 0.7,
-                ),
+                color: AppConstants.primaryColor.withValues(alpha: 0.7),
               ),
 
               const SizedBox(width: 8),
@@ -386,7 +338,7 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
- IconData _getCategoryIcon(String category) {
+  IconData _getCategoryIcon(String category) {
     switch (category.toLowerCase()) {
       case 'electronics':
         return Icons.electrical_services;

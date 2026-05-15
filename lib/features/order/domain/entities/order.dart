@@ -16,9 +16,4 @@ class Order {
   });
 }
 
-enum OrderStatus {
-  processing,
-  shipped,
-  delivered,
-  cancelled,
-}
+enum OrderStatus { processing, shipped, delivered, cancelled }

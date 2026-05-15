@@ -124,12 +124,12 @@ class OrderDetailsSheet extends StatelessWidget {
                 const SizedBox(height: 8),
 
                 _DetailRow(
-                  label: 'Total amount', 
-                  value: '${order.totalAmount.toStringAsFixed(2)}',
+                  label: 'Total amount',
+                  value: order.totalAmount.toStringAsFixed(2),
                   isEmphasized: true,
-                  ),
+                ),
 
-                  const SizedBox(height: 8),
+                const SizedBox(height: 8),
               ],
             ),
           ),

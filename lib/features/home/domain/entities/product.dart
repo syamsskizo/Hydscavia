@@ -1,8 +1,8 @@
   class Review {
     final String username;
-    final double rating; // Pake double biar bisa dihitung
+    final double rating; 
     final String comment;
-    final DateTime createdAt; // Pake DateTime lebih fleksibel
+    final DateTime createdAt;
 
   Review({
     required this.username,
@@ -39,7 +39,6 @@
     this.reviews = const [],
   });
 
-  // Fungsi hitung diskon (Udah oke)
   double getDiscountedPrice(double discountPercentage) {
     return price - (price * discountPercentage / 100);
   }
@@ -50,10 +49,8 @@
   double get averageRating {
     if (reviews.isEmpty) return 0.0;
     
-    // Hitung total semua rating
     double totalRating = reviews.fold(0, (sum, item) => sum + item.rating);
     
-    // Hitung rata-rata dan bulatkan 1 angka di belakang koma
     double avg = totalRating / reviews.length;
     return double.parse(avg.toStringAsFixed(1));
   }

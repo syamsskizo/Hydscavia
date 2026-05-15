@@ -1,6 +1,5 @@
 import 'package:flutter_application_1/features/home/domain/entities/product.dart';
 
-
 final List<Product> dummyProducts = [
   Product(
     id: '1',
@@ -22,7 +21,7 @@ final List<Product> dummyProducts = [
     name: 'Stylish Sofa',
     category: 'Perempuan',
     price: 350.00,
-    imageUrl: 'assets/images/hoodie.png', // Di video emang agak aneh namanya, sesuaikan aja Syam
+    imageUrl: 'assets/images/hoodie.png',
     images: [
       'assets/images/hoodie.png',
       'assets/images/hoodie_2.png',
@@ -54,10 +53,7 @@ final List<Product> dummyProducts = [
     category: 'Laki-laki',
     price: 500.00,
     imageUrl: 'assets/images/jordan.png',
-    images: [
-      'assets/images/jordan.png',
-      'assets/images/jordan.png',
-    ],
+    images: ['assets/images/jordan.png', 'assets/images/jordan.png'],
     description: 'Iconic sneakers with style and comfort.',
     colors: ['#1ABC9C', '#F1C40F', '#E67E22'],
     isFavorite: false,

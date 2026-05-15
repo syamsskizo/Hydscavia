@@ -246,7 +246,7 @@ class _ShippingAddressPageState extends State<ShippingAddressPage> {
                         Switch(
                           value: isDefault,
                           onChanged: (v) => setLocalState(() => isDefault = v),
-                          activeColor: AppConstants.primaryColor,
+                          activeThumbColor: AppConstants.primaryColor,
                         ),
                         Text(
                           'Set as default',
@@ -335,6 +335,7 @@ class _ShippingAddressPageState extends State<ShippingAddressPage> {
         validator: (value) {
           if (!required) return null;
           if (value == null || value.trim().isEmpty) return 'Required';
+          return null;
         },
         decoration: InputDecoration(
           labelText: label,
